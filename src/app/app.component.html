@@ -3,11 +3,23 @@
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <ul class="nav nav-tabs">
         <!--
-          Links not set up in this commit. You can directly enter the URL
+          We use the routerLink directive to specify the path we want to navigate to. This tells Angular that the
+          containing element (a) serves as a link for the route specified.
+
+          The routerLink directive can use property binding with square brackets to specify a string, for example:
+
+            [routerLink]="'/users'"
+
+          You can also use an array to specify the parts of your path In this case, only use the leading / on the first
+          element to specify an absolute path. This would specify <yourdomain>/users/somethingElse:
+
+            [routerLink]="['/users', 'somethingElse']"
+
+          Using the array allows you to construct more complex paths more easily.
         -->
-        <li role="presentation" class="active"><a href="#">Home</a></li>
-        <li role="presentation"><a href="#">Servers</a></li>
-        <li role="presentation"><a href="#">Users</a></li>
+        <li role="presentation" class="active"><a routerLink="/">Home</a></li>
+        <li role="presentation"><a routerLink="/servers">Servers</a></li>
+        <li role="presentation"><a [routerLink]="['/users']">Users</a></li>
       </ul>
     </div>
   </div>
