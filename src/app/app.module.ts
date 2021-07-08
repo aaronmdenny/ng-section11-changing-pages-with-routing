@@ -43,6 +43,17 @@ const appRoutes: Routes = [
     component: UsersComponent
   },
   {
+    /**
+     * 'users/:id' allows us to pass a value dynamically for the id. With this in place, users/<anything> will be
+     * interpreted on this path with <anything> assigned as the id.
+     * 
+     * With this route in place, we can type /users/something and we will navigate to the user page, but we cannot get
+     * there by clicking on a user yet.
+     */
+    path: 'users/:id',
+    component: UserComponent
+  },
+  {
     path: 'servers',
     component: ServersComponent
   }
