@@ -10,27 +10,6 @@
     </div>
   </div>
   <div class="col-xs-12 col-sm-4">
-    <!--
-      If we add this link to reload the page (with no leading /), it will break the app because it tries to navigate to
-      /servers/servers, which doesn't exist.
-
-      This is because the leading / establishes an absolute path. If we omit it here, then we are navigating to a
-      relative path from where we already are. Since we are already on /servers, we go to /servers/servers. This is not
-      a problem in the app component html file, because omitting the leading / does not matter if we are already at the
-      root of the path.
-
-      Using a relative path always appends what you specify in routerLink to the end of your current path.
-
-      You can also use relative paths with ./ at the beginning:
-        <a routerLink="./servers">...</a>
-
-      This is the same as having nothing in front of 'servers'.
-
-      You can also do
-        <a routerLink="../servers">...</a>
-      to go up one level. So this would actually work given the current setup here.
-    -->
-    <a routerLink="../servers">Reload Page</a>
     <app-edit-server></app-edit-server>
     <hr>
     <app-server></app-server>

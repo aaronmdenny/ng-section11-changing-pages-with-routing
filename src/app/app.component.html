@@ -17,9 +17,43 @@
 
           Using the array allows you to construct more complex paths more easily.
         -->
-        <li role="presentation" class="active"><a routerLink="/">Home</a></li>
-        <li role="presentation"><a routerLink="servers">Servers</a></li>
-        <li role="presentation"><a [routerLink]="['users']">Users</a></li>
+        <!--
+          Angular gives us the routerLinkActive directive. It can be added to an element that wraps the routerLink, as
+          we do here, or in the element where routerLink is.
+
+          It will attach the class you specify when the link is active. We use the 'active' class from Bootstrap.
+
+          The routerLinkActive directive analyzes your currently loaded path and then checks which links lead to a route
+          which use this path. By default, it marks an element as active, adding this css class, if it contains the path
+          you are currently on, that is, if it is part of the path that is currently loaded.
+
+          Since we always have /<nothing> at the beginning of our path, this path is always active. The empty path
+          segment is part of all paths.
+
+          To fix this, we can add configuration to the routerLinkActive directive.
+
+          The routerLinkActive directive has a property that you can bind to named routerLinkActiveOptions. Pass it a
+          JavaScript object with the correct configuration. The 'active' Bootstrap class will only be added if the full
+          path is the empty path.
+        -->
+        <li
+          role="presentation"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{
+            exact: true
+          }">
+          <a routerLink="/">Home</a>
+        </li>
+        <li
+          role="presentation"
+          routerLinkActive="active">
+          <a routerLink="servers">Servers</a>
+        </li>
+        <li
+          role="presentation"
+          routerLinkActive="active">
+          <a [routerLink]="['users']">Users</a>
+        </li>
       </ul>
     </div>
   </div>
