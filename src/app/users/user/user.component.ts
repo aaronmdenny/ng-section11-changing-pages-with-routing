@@ -1,22 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
   user: {
     id: number,
     name: string
   };
+  
+  paramsSubscription: Subscription;
 
   /**
    * The ActivatedRoute object contains metadata about the currently activated route. We use it to get the id of the
    * currently loaded user from the route URL.
    */
   constructor(private route: ActivatedRoute) { }
+
+  ngOnDestroy(): void {
+    this.paramsSubscription.unsubscribe();
+  }
 
   ngOnInit() {
     this.user = {
@@ -60,7 +67,18 @@ export class UserComponent implements OnInit {
      * Subscribe can take three arguments. The first argument will be fired whenever new data is sent through the
      * Observable. It is a function that will do something when this happens.
      */
-    this.route.params
+    /**
+     * Angular cleans up the subscription we set up here whenever this component is destroyed, but this is not always
+     * the case. Subscriptions live on in memory because they are not tied to components. So, if the component is 
+     * destroyed, the subscription will live on.
+     * 
+     * In this particular case below, Angular will destroy the subscription for us because we are using route
+     * observables, but when Angular does not unsubscribe for us, we will have to implement OnDestroy and unsubscribe.
+     * How to do this is shown here for illustrative purposes.
+     * 
+     * When you add your own Observables, you will always have to unsubscribe.
+     */
+    this.paramsSubscription = this.route.params
       .subscribe(
         (params: Params) => {
           this.user.id = params['id'];
