@@ -50,7 +50,7 @@ const appRoutes: Routes = [
      * With this route in place, we can type /users/something and we will navigate to the user page, but we cannot get
      * there by clicking on a user yet.
      */
-    path: 'users/:id',
+    path: 'users/:id/:name',
     component: UserComponent
   },
   {
