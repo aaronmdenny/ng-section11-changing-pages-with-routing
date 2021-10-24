@@ -1,8 +1,24 @@
 <div class="row">
   <div class="col-xs-12 col-sm-4">
     <div class="list-group">
+      <!--Add the new edit server route, for the moment, hard coded with server 5.-->
+      <!--
+        queryParams is a bindable property of the routerLink directive. It accepts a JavaScript object where we define
+        key-value pairs we want to add.
+
+        Now, when we navigate to the route /servers/5/edit, we will pass a query parameter: ?allowEdit=1
+      -->
+      <!--
+        We use fragment to pass #loading to the route. We could have also done
+        fragment="loading" instead of
+        [fragment]="'loading'"
+      -->
       <a
-        href="#"
+        [routerLink]="['/servers', 5, 'edit']"
+        [queryParams]="{
+          allowEdit: '1'
+        }"
+        [fragment]="'loading'"
         class="list-group-item"
         *ngFor="let server of servers">
         {{ server.name }}

@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  onLoadServers(): void {
+  onLoadServer(id: number): void {
     // complex calculation
     // ...done! Now we want to navigate away.
 
@@ -23,6 +23,15 @@ export class HomeComponent implements OnInit {
      * of the path. If it begins with the / character, the path is absolute. Relative paths are also possible. Just keep
      * in mind what the path is relative to.
      */
-    this.router.navigate(['/servers'])
+    /**
+     * This demonstrates programatic navigation. The user presses the button to navigate to server 1, and this function
+     * executes. Query params and the fragment are added as shown.
+     */
+    this.router.navigate(['/servers', id, 'edit'], {
+      queryParams: {
+        allowEdit: '1'
+      },
+      fragment: 'loading'
+    });
   }
 }
