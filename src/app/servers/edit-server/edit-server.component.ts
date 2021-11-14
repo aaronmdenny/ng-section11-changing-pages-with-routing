@@ -12,6 +12,7 @@ export class EditServerComponent implements OnInit {
   server: {id: number, name: string, status: string};
   serverName = '';
   serverStatus = '';
+  allowEdit = false;
 
   constructor(private serversService: ServersService, private route: ActivatedRoute) { }
 
@@ -24,8 +25,11 @@ export class EditServerComponent implements OnInit {
     console.log(this.route.snapshot.queryParams);
     console.log(this.route.snapshot.fragment);
     this.route.queryParams.subscribe(
-      (params: Params) => {
-        console.log(params);
+      (queryParams: Params) => {
+        // The allowEdit query parameter is not present when navigating to this component, because we are navigating
+        // here from a component that is on the same router outlet and we have not yet passed it here. So, right now,
+        // allowEdit is always false, and the query parameter does not show up in the URL when we navigate here.
+        this.allowEdit = queryParams['allowEdit'] === '1' ? true : false;
       }
     );
     this.route.fragment.subscribe(

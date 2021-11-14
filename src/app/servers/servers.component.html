@@ -16,10 +16,13 @@
       <!--
         Change the routerLink to navigate to the server component instead of the edit-server component.
       -->
+      <!--
+        We will decide whether or not we want to allow editing the server based on the server Id.
+      -->
       <a
         [routerLink]="['/servers', server.id]"
         [queryParams]="{
-          allowEdit: '1'
+          allowEdit: server.id === 3 ? '1' : '0'
         }"
         [fragment]="'loading'"
         class="list-group-item"

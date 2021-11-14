@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { ServersService } from '../servers.service';
 
@@ -11,7 +11,7 @@ import { ServersService } from '../servers.service';
 export class ServerComponent implements OnInit {
   server: {id: number, name: string, status: string};
 
-  constructor(private serversService: ServersService, private route: ActivatedRoute) { }
+  constructor(private serversService: ServersService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -20,6 +20,17 @@ export class ServerComponent implements OnInit {
         this.server = this.serversService.getServer(+params['id']);
       }
     );
+  }
+
+  // We add the ability to navigate to the Edit-Server Component with a button and function. We can simply append 'edit'
+  // to the route we are currently on (which is /servers/:id) because that is how it is set up in the routes array. So,
+  // this is a relative path, which requires us to pass in the second argument to navigate().
+
+  // Unfortunately, we lose the query parameters. Navigating to /servers/:id/ from /servers passed the query parameter
+  // allowEdit, but navigating to /servers/:id/edit from /servers/:id does not pass allowEdit. See how to preserve
+  // query params when navigating to a new route on the same outlet in the next commit.
+  onEdit(): void {
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
 }
