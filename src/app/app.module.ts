@@ -40,31 +40,37 @@ const appRoutes: Routes = [
   },
   {
     path: 'users',
-    component: UsersComponent
-  },
-  {
-    /**
-     * 'users/:id' allows us to pass a value dynamically for the id. With this in place, users/<anything> will be
-     * interpreted on this path with <anything> assigned as the id.
-     * 
-     * With this route in place, we can type /users/something and we will navigate to the user page, but we cannot get
-     * there by clicking on a user yet.
-     */
-    path: 'users/:id/:name',
-    component: UserComponent
+    component: UsersComponent,
+    children: [
+      {
+        /**
+         * 'users/:id' allows us to pass a value dynamically for the id. With this in place, users/<anything> will be
+         * interpreted on this path with <anything> assigned as the id.
+         * 
+         * With this route in place, we can type /users/something and we will navigate to the user page, but we cannot get
+         * there by clicking on a user yet.
+         */
+        path: ':id/:name',
+        component: UserComponent
+      }
+    ]
   },
   {
     path: 'servers',
-    component: ServersComponent
+    component: ServersComponent,
+    // We can move the routes that will be rendered within the ServersComponent into the children array. In so doing, we
+    // remove the leading 'servers'.
+    children: [
+      {
+        path: ':id',
+        component: ServerComponent
+      },
+      {
+        path: ':id/edit',
+        component: EditServerComponent
+      }
+    ]
   },
-  {
-    path: 'servers/:id',
-    component: ServerComponent
-  },
-  {
-    path: 'servers/:id/edit',
-    component: EditServerComponent
-  }
 ]
 
 @NgModule({

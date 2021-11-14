@@ -29,13 +29,18 @@
     </div>
   </div>
   <div class="col-xs-12 col-sm-4">
-    <button
+    <!--
+      We need a place for the children routes to be rendered, so we add it here. All child routes of the route being
+      loaded will render here.
+    -->
+    <router-outlet></router-outlet>
+    <!-- <button
       class="btn btn-primary"
       (click)="onReload()">
       Reload Page
     </button>
     <app-edit-server></app-edit-server>
-    <hr>
+    <hr> -->
     <!--
       We comment this out for now because the Server Component will not have access to the server id from the route,
       since the current route does not have it. We will see how to do child routing later.
