@@ -29,8 +29,11 @@ export class ServerComponent implements OnInit {
   // Unfortunately, we lose the query parameters. Navigating to /servers/:id/ from /servers passed the query parameter
   // allowEdit, but navigating to /servers/:id/edit from /servers/:id does not pass allowEdit. See how to preserve
   // query params when navigating to a new route on the same outlet in the next commit.
+
+  // To preserve query parameters, we can add a property to the JavaScript object. The queryParamsHandling property can
+  // be set to 'merge' to merge any new query params to existing ones, or 'preserve' to just keep existing ones.
   onEdit(): void {
-    this.router.navigate(['edit'], { relativeTo: this.route });
+    this.router.navigate(['edit'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
   }
 
 }
