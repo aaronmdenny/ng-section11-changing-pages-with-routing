@@ -13,8 +13,11 @@
         fragment="loading" instead of
         [fragment]="'loading'"
       -->
+      <!--
+        Change the routerLink to navigate to the server component instead of the edit-server component.
+      -->
       <a
-        [routerLink]="['/servers', 5, 'edit']"
+        [routerLink]="['/servers', server.id]"
         [queryParams]="{
           allowEdit: '1'
         }"
@@ -33,7 +36,11 @@
     </button>
     <app-edit-server></app-edit-server>
     <hr>
-    <app-server></app-server>
+    <!--
+      We comment this out for now because the Server Component will not have access to the server id from the route,
+      since the current route does not have it. We will see how to do child routing later.
+    -->
+    <!-- <app-server></app-server> -->
   </div>
 </div>
 
