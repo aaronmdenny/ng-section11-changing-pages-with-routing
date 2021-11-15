@@ -35,6 +35,18 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
  * 
  */
 const appRoutes: Routes = [
+  /**
+   * This first path is for the path with nothing after the domain name. If you were to add a redirect in this path, you
+   * would find a problem. This route would ALWAYS redirect the user. This is because Angular's default matching
+   * strategy is 'prefix'. What this means is that Angular checks if the path you entered in the URL starts with the
+   * path specified in the route. Every path starts with ''.
+   * 
+   * To fix this, when redirecting from this path, you should change the matching strategy to 'full':
+   * 
+   * { path: '', redirectTo: '/somewhere-else', pathMatch: 'full' }
+   * 
+   * Now, you will only be redirected if the full path is '' (so only if there is no content in the path you enter).
+   */
   {
     path: '',
     component: HomeComponent
