@@ -11,6 +11,7 @@ import { UserComponent } from './users/user/user.component';
 import { EditServerComponent } from './servers/edit-server/edit-server.component';
 import { ServerComponent } from './servers/server/server.component';
 import { ServersService } from './servers/servers.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 /**
  * We set up our routes here, in AppModule.
@@ -71,6 +72,19 @@ const appRoutes: Routes = [
       }
     ]
   },
+  // We create the not-found path and redirect all paths that the user can enter after / to the not-found path via a
+  // redirect.
+  {
+    path: 'not-found',
+    component: PageNotFoundComponent
+  },
+  // redirectTo is an alternative to the component property. It can be added to any route.
+  // The double asterisks will catch all paths that we do not define. This route should always be the last one in your
+  // array of routes, otherwise, it would catch the path of one of the routes defined below it.
+  {
+    path: '**',
+    redirectTo: '/not-found'
+  }
 ]
 
 @NgModule({
@@ -81,7 +95,8 @@ const appRoutes: Routes = [
     ServersComponent,
     UserComponent,
     EditServerComponent,
-    ServerComponent
+    ServerComponent,
+    PageNotFoundComponent
   ],
   /**
    * Add RouterModule to the imports array to give the app routing functionality. forRoot() allows us to register
