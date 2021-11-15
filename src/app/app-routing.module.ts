@@ -43,6 +43,10 @@ import { UsersComponent } from "./users/users.component";
      * 
      * Now, you will only be redirected if the full path is '' (so only if there is no content in the path you enter).
      */
+    /**
+     * Angular allows us to run some code before a route is loaded, or once you want to leave a route. Do this with
+     * route guards.
+     */
     {
       path: '',
       component: HomeComponent
